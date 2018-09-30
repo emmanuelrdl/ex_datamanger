@@ -36,7 +36,7 @@ defmodule DatamanagerWeb.Endpoint do
     store: :cookie,
     key: "_datamanager_key",
     signing_salt: "QpLVjQZz"
-
+  plug PhoenixGon.Pipeline
   plug DatamanagerWeb.Router
 
   @doc """

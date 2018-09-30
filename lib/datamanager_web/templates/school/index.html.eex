@@ -1,3 +1,30 @@
-<div class="jumbotron">
-  <h2>Hello World, from Phoenix!</h2>
-</div>
+
+
+
+<div style="height:680px;" id="map"></div>
+
+<script type="text/javascript">
+  var schools = window.Gon.assets('schools').schools.records
+  // initialize the map
+  var map = L.map('map').setView([48.8, 2.3], 10);
+
+  // load a tile layer
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: 'Tiles by <a href="http://mapc.org">MAPC</a>, Data by <a href="http://mass.gov/mgis">MassGIS</a>',
+    maxZoom: 17,
+    minZoom: 9
+  }).addTo(map);
+
+  var markersCluster = new L.MarkerClusterGroup();
+
+  for (var i = 0; i < schools.length; i++) {
+    lng = schools[i].geometry.coordinates[0];
+    lat = schools[i].geometry.coordinates[1];
+    var latLng = new L.LatLng(lat, lng);
+    var marker = new L.Marker(latLng, {title: "toto"});
+    markersCluster.addLayer(marker);
+  }
+
+  map.addLayer(markersCluster);
+</script>
