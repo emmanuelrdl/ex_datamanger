@@ -12,18 +12,22 @@
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
     attribution: 'Tiles by <a href="http://mapc.org">MAPC</a>, Data by <a href="http://mass.gov/mgis">MassGIS</a>',
-    maxZoom: 17,
-    minZoom: 9
+    maxZoom: 20,
+    minZoom: 2
   }).addTo(map);
 
   var markersCluster = new L.MarkerClusterGroup();
 
   for (var i = 0; i < schools.length; i++) {
-    lng = schools[i].geometry.coordinates[0];
-    lat = schools[i].geometry.coordinates[1];
-    var latLng = new L.LatLng(lat, lng);
-    var marker = new L.Marker(latLng, {title: "toto"});
-    markersCluster.addLayer(marker);
+    if (schools[i].geometry){
+      lng = schools[i].geometry.coordinates[0];
+      lat = schools[i].geometry.coordinates[1];
+      var latLng = new L.LatLng(lat, lng);
+      var marker = new L.Marker(latLng);
+      marker.bindPopup(schools[i].fields.nom_etablissement).openPopup();
+      markersCluster.addLayer(marker);
+    }
+
   }
 
   map.addLayer(markersCluster);
