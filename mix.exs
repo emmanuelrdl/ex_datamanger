@@ -42,7 +42,8 @@ defmodule Datamanager.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:httpotion, "~> 3.1.0"},
-      {:phoenix_gon, "~> 0.4.0"}
+      {:phoenix_gon, "~> 0.4.0"},
+      {:elastix, ">= 0.0.0"}
     ]
   end
 
