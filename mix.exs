@@ -43,7 +43,9 @@ defmodule Datamanager.Mixfile do
       {:cowboy, "~> 1.0"},
       {:httpotion, "~> 3.1.0"},
       {:phoenix_gon, "~> 0.4.0"},
-      {:elastix, ">= 0.0.0"}
+      {:elastix, ">= 0.0.0"},
+      {:csv, "~> 2.0.0"},
+      {:countriex, "~> 0.4"}
     ]
   end
 

@@ -16,6 +16,7 @@ defmodule DatamanagerWeb.Router do
   scope "/", DatamanagerWeb do
     pipe_through :browser # Use the default browser stack
     get "/schools", SchoolController, :index
+    get "/pib", PibController, :index
     get "/", PageController, :index
   end
 

@@ -1,0 +1,44 @@
+
+
+
+<div style="height:880px;width:800px;" id="map"></div>
+
+<script type="text/javascript">
+  var countries = window.Gon.assets('countries').countries
+  console.log(countries);
+  // initialize the map
+  var map = L.map('map').setView([48.8, 2.3], 2);
+
+  // load a tile layer
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: 'Tiles by <a href="http://mapc.org">MAPC</a>, Data by <a href="http://mass.gov/mgis">MassGIS</a>',
+    maxZoom: 20,
+    minZoom: 2
+  }).addTo(map);
+
+
+  for (var i = 0; i < countries.length; i++) {
+    if (countries[i] && countries[i].geo){
+      var lat = countries[i].geo.latitude;
+      var lng = countries[i].geo.longitude;
+      var pib = parseInt(countries[i].pib)
+      if  (!isNaN(pib)) {
+        var radius = pib/15000000
+        var circles = new L.circle([lat, lng], {
+            color: 'red',
+            html: "5",
+            fillOpacity: 0.5,
+            radius: radius
+        }).addTo(map);
+      }
+
+    }
+
+
+
+
+  }
+
+  map.addLayer(circles);
+</script>
