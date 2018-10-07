@@ -4,7 +4,7 @@
 <div style="height:680px;" id="map"></div>
 
 <script type="text/javascript">
-  var schools = window.Gon.assets('schools').schools.records
+  var schools = window.Gon.assets('schools').schools
   // initialize the map
   var map = L.map('map').setView([48.8, 2.3], 10);
 
@@ -19,12 +19,12 @@
   var markersCluster = new L.MarkerClusterGroup();
 
   for (var i = 0; i < schools.length; i++) {
-    if (schools[i].geometry){
-      lng = schools[i].geometry.coordinates[0];
-      lat = schools[i].geometry.coordinates[1];
+    if (schools[i].latitude){
+      lng = schools[i].longitude;
+      lat = schools[i].latitude;
       var latLng = new L.LatLng(lat, lng);
       var marker = new L.Marker(latLng);
-      marker.bindPopup(schools[i].fields.nom_etablissement).openPopup();
+      marker.bindPopup(schools[i].nom_etablissement).openPopup();
       markersCluster.addLayer(marker);
     }
 
