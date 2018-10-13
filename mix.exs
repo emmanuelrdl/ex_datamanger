@@ -45,7 +45,8 @@ defmodule Datamanager.Mixfile do
       {:phoenix_gon, "~> 0.4.0"},
       {:elastix, ">= 0.0.0"},
       {:csv, "~> 2.0.0"},
-      {:countriex, "~> 0.4"}
+      {:countriex, "~> 0.4"},
+      {:distillery, "~> 1.5", runtime: false}
     ]
   end
 
