@@ -1,12 +1,9 @@
-
-
-
-<div style="height:880px;width:800px;" id="map"></div>
+<div id="map-pib"></div>
 
 <script type="text/javascript">
   var countries = window.Gon.assets('countries').countries
   // initialize the map
-  var map = L.map('map').setView([48.8, 2.3], 2);
+  var map = L.map('map-pib').setView([48.8, 2.3], 2);
 
   // load a tile layer
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
