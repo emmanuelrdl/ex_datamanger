@@ -18,3 +18,11 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Docs: https://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
+
+## Deploy
+
+Ref:  https://blog.dockbit.com/deploying-elixir-applications-with-docker-1e1dd5b39ab9
+
+- create Dockerfile 
+- docker build -t welcomedocker123/ex_datamanger .
+- docker push welcomedocker123/ex_datamanger 
