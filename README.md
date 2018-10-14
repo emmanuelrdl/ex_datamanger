@@ -21,7 +21,11 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
 
 ## Deploy
 
-Ref:  https://blog.dockbit.com/deploying-elixir-applications-with-docker-1e1dd5b39ab9
+Ref:  
+https://blog.cloud66.com/deploying-your-phoenix-applications-in-production-using-docker/
+https://pspdfkit.com/blog/2018/how-to-run-your-phoenix-application-with-docker/
+https://blog.dockbit.com/deploying-elixir-applications-with-docker-1e1dd5b39ab9
+https://blog.cloud66.com/deploying-your-phoenix-applications-in-production-using-docker/
 
 - create Dockerfile 
 - docker build -t welcomedocker123/ex_datamanger .

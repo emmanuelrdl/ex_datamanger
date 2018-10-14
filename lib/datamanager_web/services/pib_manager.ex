@@ -4,6 +4,7 @@ defmodule DatamanagerWeb.PibManager do
     rows = File.stream!("pib.csv") |> CSV.decode |>  Enum.map(fn k -> k |> elem(1) end) |> Enum.drop(1)
     countries = Enum.map rows, fn k ->
       pib =  k |> Enum.at(-1)
+      country = nil
       if (k |> Enum.at(2) == "United States") do
         country = Countriex.get_by(:name, "United States of America")
       else
