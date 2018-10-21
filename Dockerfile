@@ -1,38 +1,37 @@
-# base image elixer to start with
-FROM elixir:latest
+#===========
+FROM bitwalker/alpine-elixir:1.7 as build
 
-# install hex package manager
-RUN mix local.hex --force
 
-# install phoenix
-RUN mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez --force
+# Copy the source folder into the Docker image
+COPY . .
 
-# install node
-RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
-RUN bash nodesource_setup.sh
-RUN apt-get install nodejs
+# Install dependencies and build Release
+RUN export MIX_ENV=prod && \
+    rm -Rf _build && \
+    mix deps.get && \
+    mix phx.digest && \
+    mix release
 
-# create app folder
-RUN mkdir /app
-COPY . /app
-WORKDIR /app
+# Extract Release archive to /rel for copying in next stage
+RUN APP_NAME="datamanager" && \
+    RELEASE_DIR=`ls -d _build/prod/rel/$APP_NAME/releases/*/` && \
+    mkdir /export && \
+    tar -xf "$RELEASE_DIR/$APP_NAME.tar.gz" -C /export
 
-# setting the port and the environment (prod = PRODUCTION!)
-ENV MIX_ENV=prod
-ENV PORT=4000
+#================
+#Deployment Stage
+#================
+FROM pentacent/alpine-erlang-base:latest
 
-# install dependencies (production only)
-RUN mix local.rebar --force
-RUN mix deps.get --only prod
-RUN mix compile
+#Set environment variables and expose port
+EXPOSE 4000
+ENV REPLACE_OS_VARS=true \
+    PORT=4000
 
-# install node dependencies
-#RUN npm install
-# build only the things for production
-#RUN node node_modules/brunch/bin/brunch build --production
+#Copy and extract .tar.gz Release file from the previous stage
+COPY --from=build /export/ .
 
-# create the digests
-RUN mix phoenix.digest
 
-# run phoenix in production on PORT 4000
-CMD mix phoenix.server
+#Set default entrypoint and command
+ENTRYPOINT ["/opt/app/bin/datamanager"]
+CMD ["foreground"]
