@@ -23,5 +23,5 @@ Update your prod.exs to make it act as a server
 - docker pull postgres
 - docker run -dit --name=postgresql -e POSTGRES_DB=datamanager_prod postgres
 - docker build -t datamanager .
-- docker run -dit --link=postgresql:postgres_host -p 4000:4000 datamanager
+- docker run -t --link=postgresql:postgres_host -p 4000:4000 datamanager
 - docker push welcomedocker123/ex_datamanger

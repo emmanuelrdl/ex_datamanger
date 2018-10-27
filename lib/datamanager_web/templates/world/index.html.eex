@@ -2,6 +2,7 @@
 
 <script type="text/javascript">
   var countries = window.Gon.assets('countries').countries
+  console.log(countries);
   // initialize the map
   var map = L.map('map-pib').setView([48.8, 2.3], 2);
 
@@ -28,13 +29,10 @@
             radius: radius
         }).addTo(map);
       }
-
     }
-
-
-
 
   }
 
-  map.addLayer(circles);
+
+
 </script>

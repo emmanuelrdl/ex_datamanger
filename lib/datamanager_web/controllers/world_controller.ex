@@ -6,6 +6,7 @@ defmodule DatamanagerWeb.WorldController do
 
   def index(conn, _params) do
     countries = get_countries
+    IO.inspect countries
     conn      = put_gon(conn, countries: countries)
     render conn, "index.html"
   end
