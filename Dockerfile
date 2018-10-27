@@ -1,11 +1,16 @@
 #===========
 FROM bitwalker/alpine-elixir:1.7 as build
+RUN apk add nodejs
+RUN apk add npm
 
 
 # Copy the source folder into the Docker image
 COPY . .
 
 # Install dependencies and build Release
+RUN npm install -g brunch
+RUN cd assets &&  brunch build --production 
+
 RUN export MIX_ENV=prod && \
     rm -Rf _build && \
     mix deps.get && \
